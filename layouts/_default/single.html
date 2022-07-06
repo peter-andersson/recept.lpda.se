@@ -1,0 +1,56 @@
+{{ define "main" }}
+
+<div>
+  <article>
+    <!-- call up the main recipe title and content -->
+    <header>
+      <h1>{{ .Title }}</h1>
+    </header>
+
+    <div>
+      {{ with .Params.portioner }}
+      <div>
+        <h4>Portioner: {{ . }}</h4>
+      </div>
+      {{ end }}
+
+      {{ with .Params.tid }}
+      <div>
+        <h4>Tid: {{ . }} minuter</h4>
+      </div>
+      {{ end }}
+
+      {{ if isset .Params "frånurl" }}
+      <h4>Från: <a href="{{ .Params.frånurl }}">{{ .Params.från }}</a></h4>
+      {{ else if isset .Params "från" }}
+      <h4>Från: {{ .Params.från }}</h4>
+      {{ end }}
+    </div>
+
+    <div>
+      <div>
+        {{ with .Params.ingredienser }}
+        <h4>Ingredienser</h4>
+        <ul>
+          {{ range . }}
+          <li>
+            {{ with ( . | markdownify) }}{{ . }}{{ end }}
+          </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+
+      <div>
+        <h4>Gör så här</h4>
+        <ul>
+          {{ range .Params.steg }}
+          <li>
+            {{ with ( . | markdownify) }}{{ . }}{{ end }}</li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </article>
+</div>
+{{ end }}
