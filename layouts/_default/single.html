@@ -1,37 +1,29 @@
 {{ define "main" }}
 
-<div>
-  <article>
-    <!-- call up the main recipe title and content -->
-    <header>
-      <h1>{{ .Title }}</h1>
-    </header>
+      <h2 class="text-2xl pt-2">{{ .Title }}</h2>
 
-    <div>
       {{ with .Params.portioner }}
-      <div>
-        <h4>Portioner: {{ . }}</h4>
-      </div>
+      <p>
+        <span class="font-bold">Portioner: </span><span>{{ . }}</span>
+      </p>
       {{ end }}
 
       {{ with .Params.tid }}
-      <div>
-        <h4>Tid: {{ . }} minuter</h4>
-      </div>
+      <p>
+        <span class="font-bold">Tid: </span><span>{{ . }} minuter</span>        
+      </p>
       {{ end }}
 
       {{ if isset .Params "frånurl" }}
-      <h4>Från: <a href="{{ .Params.frånurl }}">{{ .Params.från }}</a></h4>
+      <p><span class="font-bold">Från: </span><a class="underline" href="{{ .Params.frånurl }}">{{ .Params.från }}</a></p>
       {{ else if isset .Params "från" }}
-      <h4>Från: {{ .Params.från }}</h4>
+      <p><span class="font-bold">Från: </span> {{ .Params.från }}</h4>
       {{ end }}
-    </div>
 
-    <div>
-      <div>
+      <p>
         {{ with .Params.ingredienser }}
-        <h4>Ingredienser</h4>
-        <ul>
+        <h3 class="text-xl font-bold pt-2">Ingredienser</h3>
+        <ul class="list-disc list-inside">
           {{ range . }}
           <li>
             {{ with ( . | markdownify) }}{{ . }}{{ end }}
@@ -39,18 +31,13 @@
           {{ end }}
         </ul>
         {{ end }}
-      </div>
+      </p>
 
-      <div>
-        <h4>Gör så här</h4>
-        <ul>
+        <h3 class="text-xl font-bold pt-2">Gör så här</h4>
+        <ul class="list-disc list-inside">
           {{ range .Params.steg }}
           <li>
             {{ with ( . | markdownify) }}{{ . }}{{ end }}</li>
           {{ end }}
         </ul>
-      </div>
-    </div>
-  </article>
-</div>
 {{ end }}

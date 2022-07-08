@@ -1,16 +1,7 @@
 {{ define "main" }}
-
-  <div>
-    <!-- Note that the content for index.html, as a sort of list page, will pull from content/_index.md -->
-    {{.Content}}
-  </div>
-  <div>
-
-    <ul>
+      <ul class="list-inside">
         {{ range .Site.RegularPages }}
-        <li><a href="{{.Permalink}}">{{.Title}}</a></li>
+        <li><a class="underline" href="{{.Permalink}}">{{.Title}}</a></li>
         {{end}}
         </ul>
-        
-  </div>
 {{ end }}
